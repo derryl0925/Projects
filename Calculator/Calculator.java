@@ -12,13 +12,13 @@ public class Calculator {
         double num2;
         double result = 0;
         char operator;
-        boolean cont = true; // Added feature: flag to continue calculations
-        String history = ""; // Added feature: history of calculations
+        boolean cont = true;
+        String history = ""; 
         ArrayList<Double> nums = new ArrayList<Double>();
 
         Scanner input = new Scanner(System.in);
 
-        while (cont) { // Added feature: allow for multiple calculations
+        while (cont) {
             System.out.println("Do you want to perform a basic operation (B) or calculate statistics (S)?");
             char option = input.next().charAt(0);
 
@@ -28,7 +28,7 @@ public class Calculator {
                 System.out.println("Please enter num2");
                 num2 = input.nextDouble();
 
-                System.out.println("Choose operator +, -, *, /, or ^"); // Added feature: exponentiation
+                System.out.println("Choose operator +, -, *, /, or ^");
                 operator = input.next().charAt(0);
 
                 if (operator == '+') {
@@ -49,12 +49,10 @@ public class Calculator {
                     System.out.println("Please re-enter operator");
                 }
 
-                history += String.format("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); // Added feature:
-                                                                                                 // append calculation
-                                                                                                 // to history
-                System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); // Added feature: print the
-                                                                                          // calculation
-                System.out.println("Calculation history:\n" + history); // Added feature: print the history
+                history += String.format("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); 
+                                                                                                 
+                System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); 
+                System.out.println("Calculation history:\n" + history); 
 
             } else if (option == 'S' || option == 's') {
                 nums.clear();
@@ -88,8 +86,7 @@ public class Calculator {
                 System.out.println("Invalid choice. Please select B or S.");
             }
 
-            System.out.println("Do you want to continue? (Y/N)"); // Added feature: ask user if they want to
-                                                                      // continue
+            System.out.println("Do you want to continue? (Y/N)"); 
                 char choice = input.next().charAt(0);
                 while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
                     System.out.println("Please select Y or N");
@@ -100,9 +97,10 @@ public class Calculator {
                 } else if (choice == 'Y' || choice == 'y') {
                     cont = true;
                 }
-            
+
         }
-    
+
         input.close();
+
     }
 }

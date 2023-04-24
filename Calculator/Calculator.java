@@ -2,6 +2,7 @@
 /*
  * Derrick Lin
  */
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Calculator {
@@ -12,50 +13,94 @@ public class Calculator {
         double result = 0;
         char operator;
         boolean cont = true; // Added feature: flag to continue calculations
+        String history = ""; // Added feature: history of calculations
+        ArrayList<Double> nums = new ArrayList<Double>();
 
         Scanner input = new Scanner(System.in);
 
         while (cont) { // Added feature: allow for multiple calculations
+            System.out.println("Do you want to perform a basic operation (B) or calculate statistics (S)?");
+            char option = input.next().charAt(0);
 
-            System.out.println("Please enter num1");
-            num1 = input.nextDouble();
-            System.out.println("Please enter num2");
-            num2 = input.nextDouble();
-    
-            System.out.println("Choose operator +, -, *, /, or ^"); // Added feature: exponentiation
-            operator = input.next().charAt(0);
-    
-            if (operator == '+') {
-                result = num1 + num2;
-            } else if (operator == '-') {
-                result = num1 - num2;
-            } else if (operator == '*') {
-                result = num1 * num2;
-            } else if (operator == '/') {
-                if (num2 == 0) {
-                    System.out.println("Cannot divide by zero");
+            if (option == 'B' || option == 'b') {
+                System.out.println("Please enter num1");
+                num1 = input.nextDouble();
+                System.out.println("Please enter num2");
+                num2 = input.nextDouble();
+
+                System.out.println("Choose operator +, -, *, /, or ^"); // Added feature: exponentiation
+                operator = input.next().charAt(0);
+
+                if (operator == '+') {
+                    result = num1 + num2;
+                } else if (operator == '-') {
+                    result = num1 - num2;
+                } else if (operator == '*') {
+                    result = num1 * num2;
+                } else if (operator == '/') {
+                    if (num2 == 0) {
+                        System.out.println("Cannot divide by zero");
+                    } else {
+                        result = num1 / num2;
+                    }
+                } else if (operator == '^') {
+                    result = Math.pow(num1, num2);
                 } else {
-                    result = num1 / num2;
+                    System.out.println("Please re-enter operator");
                 }
-            } else if (operator == '^') {
-                result = Math.pow(num1, num2);
+
+                history += String.format("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); // Added feature:
+                                                                                                 // append calculation
+                                                                                                 // to history
+                System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); // Added feature: print the
+                                                                                          // calculation
+                System.out.println("Calculation history:\n" + history); // Added feature: print the history
+
+            } else if (option == 'S' || option == 's') {
+                nums.clear();
+
+                System.out.println("Enter the number of data points: ");
+                int n = input.nextInt();
+
+                for (int i = 1; i <= n; i++) {
+                    System.out.println("Enter data point " + i + ": ");
+                    nums.add(input.nextDouble());
+                }
+
+                double sum = 0;
+                for (double num : nums) {
+                    sum += num;
+                }
+                double mean = sum / nums.size();
+
+                double variance = 0;
+                for (double num : nums) {
+                    variance += Math.pow(num - mean, 2);
+                }
+                variance /= nums.size();
+
+                double stdDev = Math.sqrt(variance);
+
+                System.out.printf("Mean: %.2f\n", mean);
+                System.out.printf("Variance: %.2f\n", variance);
+                System.out.printf("Standard Deviation: %.2f\n", stdDev);
             } else {
-                System.out.println("Please re-enter operator");
+                System.out.println("Invalid choice. Please select B or S.");
             }
-    
-            System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); // Added feature: print the calculation
-    
-            System.out.println("Do you want to continue? (Y/N)"); // Added feature: ask user if they want to continue
-            char choice = input.next().charAt(0);
-            while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
-                System.out.println("Please select Y or N");
-                choice = input.next().charAt(0);
-            }
-            if (choice == 'N' || choice == 'n') {
-                cont = false;
-            } else if (choice == 'Y' || choice == 'y') {
-                cont = true;
-            }
+
+            System.out.println("Do you want to continue? (Y/N)"); // Added feature: ask user if they want to
+                                                                      // continue
+                char choice = input.next().charAt(0);
+                while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+                    System.out.println("Please select Y or N");
+                    choice = input.next().charAt(0);
+                }
+                if (choice == 'N' || choice == 'n') {
+                    cont = false;
+                } else if (choice == 'Y' || choice == 'y') {
+                    cont = true;
+                }
+            
         }
     
         input.close();

@@ -13,7 +13,7 @@ public class Calculator {
         double result = 0;
         char operator;
         boolean cont = true;
-        String history = ""; 
+        String history = "";
         ArrayList<Double> nums = new ArrayList<Double>();
 
         Scanner input = new Scanner(System.in);
@@ -49,10 +49,10 @@ public class Calculator {
                     System.out.println("Please re-enter operator");
                 }
 
-                history += String.format("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); 
-                                                                                                 
-                System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result); 
-                System.out.println("Calculation history:\n" + history); 
+                history += String.format("%.2f %c %.2f = %.2f\n", num1, operator, num2, result);
+
+                System.out.printf("%.2f %c %.2f = %.2f\n", num1, operator, num2, result);
+                System.out.println("Calculation history:\n" + history);
 
             } else if (option == 'S' || option == 's') {
                 nums.clear();
@@ -86,17 +86,17 @@ public class Calculator {
                 System.out.println("Invalid choice. Please select B or S.");
             }
 
-            System.out.println("Do you want to continue? (Y/N)"); 
-                char choice = input.next().charAt(0);
-                while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
-                    System.out.println("Please select Y or N");
-                    choice = input.next().charAt(0);
-                }
-                if (choice == 'N' || choice == 'n') {
-                    cont = false;
-                } else if (choice == 'Y' || choice == 'y') {
-                    cont = true;
-                }
+            System.out.println("Do you want to continue? (Y/N)");
+            char choice = input.next().charAt(0);
+            while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+                System.out.println("Please select Y or N");
+                choice = input.next().charAt(0);
+            }
+            if (choice == 'N' || choice == 'n') {
+                cont = false;
+            } else if (choice == 'Y' || choice == 'y') {
+                cont = true;
+            }
 
         }
 
